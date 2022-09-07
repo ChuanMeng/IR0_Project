@@ -5,9 +5,10 @@ Passage num: 3473
 Query num: 3000 (train), 300 (validation), 300 (test)
 
 ## Pipleline
-Please run the following scripts sequentially
-```
+Please run the following scripts sequentially.
+
 ### Full ranking on the training, validation and test sets
+```
 Python main.py --mode inference --ranking full_ranking --dataset train
 Python main.py --mode inference --ranking full_ranking --dataset validation
 Python main.py --mode inference --ranking full_ranking --dataset test
