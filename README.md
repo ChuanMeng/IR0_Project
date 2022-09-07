@@ -1,13 +1,15 @@
-# IR0 Project
+# Project Guidelines
+
+## Overall
+...
 
 ## Requirements 
 * python 3.6-3.9
 * pytorch 1.2.0-1.4.0
 
-
-## Dataset
-Passage num: 3473
-Query num: 3000 (train), 300 (validation), 300 (test)
+## Data statistics
+* Passage num: 3473
+* Query num: 3000 (train), 300 (validation), 300 (test)
 
 ## Pipleline
 Please run the following scripts sequentially.
@@ -52,3 +54,4 @@ NDCG@100: 0.5578
 MRR@100: 0.2885
 NDCG@100: 0.5623
 ```
+## Submission to the leaderboard
