@@ -1,5 +1,10 @@
 # IR0 Project
 
+## Requirements 
+* python 3.6-3.9
+* pytorch 1.2.0-1.4.0
+
+
 ## Dataset
 Passage num: 3473
 Query num: 3000 (train), 300 (validation), 300 (test)
