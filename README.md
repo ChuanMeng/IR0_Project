@@ -8,8 +8,12 @@
 * pytorch 1.2.0-1.4.0
 
 ## Data statistics
-* Passage num: 3473
-* Query num: 3000 (train), 300 (validation), 300 (test)
+
+| File name          | Num Records              |
+| ------------------ | ------------------------ |
+| Passage.json       | 250000                   |
+| train_queries.json | 3000                     |
+
 
 ## Pipleline
 Please run the following scripts sequentially.
