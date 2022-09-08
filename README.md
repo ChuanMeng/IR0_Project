@@ -2,13 +2,16 @@
 
 ## Overall
 
-what are the input (data) and output (submit to leaderboard)?
-how many modules? 
-what is the fuction of each module? what are the input and output of each module?
+* what are the input (data) and output (submit to leaderboard)?
+* how many modules? 
+* what is the fuction of each module? what are the input and output of each module?
+* what the students shoud not do? (e.g., cannot use sklearn and other off-the-shelf pacakges for ranking)
+* How the students can improve the pipeline? (e.g., do stem and more advanced word segmentation method ... implement more effective ranking models)
 
 ## Requirements 
 * python 3.6-3.9
-* pytorch 1.2.0-1.4.0
+* pytorch 
+* nltk
 
 ## Data statistics
 
