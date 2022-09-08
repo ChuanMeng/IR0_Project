@@ -24,7 +24,7 @@ def query_loader(path):
 
 
 def label_loader(path):
-    print("load labels from: {}".format(path))
+    print("Load labels from: {}".format(path))
     labels = json.load(open(path, 'r'))
     
     return labels

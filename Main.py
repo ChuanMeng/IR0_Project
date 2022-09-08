@@ -115,7 +115,7 @@ def re_ranking(args):
 
 def evaluation(args):
     
-    #print("Load file {}".format(os.path.join(args.data_path, args.dataset+"_"+args.label_file)))
+
     q2labels = label_loader(os.path.join(args.data_path, args.dataset+"_"+args.label_file))
     
     print("Load file {}".format(os.path.join(args.output_path, args.ranking_type+"_"+args.dataset+"_"+args.result_file)))
@@ -124,7 +124,6 @@ def evaluation(args):
     with codecs.open(os.path.join(args.output_path, args.ranking_type+"_"+args.dataset+"_"+args.result_file), "r", "utf-8") as file:
         for line in file.readlines():
             content = line.split('\t')
-            #scores[content[0]][int(content[2])]=content[1] 
             scores[content[0]].append(content[1]) 
     
     
