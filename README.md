@@ -27,7 +27,7 @@ Python main.py --mode infer --ranking_type full_ranking --dataset test
 
 ### Re ranking: training on the training set, and inference on the validation and test sets
 ```
-Python main.py --mode train --ranking_type re_ranking --dataset train --replicability
+Python main.py --mode train --ranking_type re_ranking --dataset training --replicability
 Python main.py --mode inference --ranking_type re_ranking --dataset validation
 Python main.py --mode inference --ranking_type re_ranking --dataset test
 ```
