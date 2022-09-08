@@ -4,34 +4,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
-import codecs
 import json
 import collections
 
-
-
-def get_format_data(args):
-    
-    q_id = []
-    x = []
-    y = []
-    
-    
-    label = json.load(open("data/"+args.dataset+"_labels.json", 'r'))
-    
-    with codecs.open(args.dataset+"_full_ranking.text", "r", "utf-8") as file:
-        for line in file.readlines():
-            content = line.split('\t')
-
-            q_id.append(content[0]) 
-            x.append([float(content[3]),float(content[4])])
-            y.append(1 if content[1] in label[content[0]] else 0)
-            
-            
-            #print(content[0],[float(content[3]),float(content[4])],1 if content[1] in label[content[0]] else 0)
-            
-    return q_id, x, y
-    
   
 def get_pair_passage_data(q_id, x, y):
     pairs = []
@@ -65,8 +40,7 @@ def get_pair_passage_data(q_id, x, y):
 
 class Dataset(data.Dataset):
 
-    def __init__(self, args):
-        q_id, x, y = get_format_data(args)
+    def __init__(self, args, q_id, x, y):
         
         self.pair_num, self.tensor_pair1, self.tensor_pair2 = get_pair_passage_data(q_id, x, y)
 
@@ -75,19 +49,6 @@ class Dataset(data.Dataset):
 
     def __len__(self):
         return self.pair_num
-
-
-def get_loader(args, shuffle, num_workers):
-    dataset = Dataset(args)
-    
-    data_loader = torch.utils.data.DataLoader(
-        dataset=dataset,
-        batch_size = args.batch_size,
-        shuffle = shuffle,
-        num_workers=num_workers
-    )
-    return data_loader
-
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -118,25 +79,28 @@ class RankNet(nn.Module):
         return result
 
 
-
-def train(args):
+def train(args, q_id, x, y):
     
-
-
     model = RankNet(args.input_size, args.hidden_size1, args.hidden_size2, args.output_size).to(device)
  
     criterion = nn.BCELoss()
     optimizer = optim.Adam(model.parameters(), lr = args.lr)
-
-    data_loader = get_loader(args, True, 1)
+    
+    dataset = Dataset(args, q_id, x, y)
+    data_loader = torch.utils.data.DataLoader(
+        dataset=dataset,
+        batch_size = args.batch_size,
+        shuffle = True,
+        num_workers=1
+    )
     total_step = len(data_loader)
 
     for epoch in range(args.epochs):
-        for i, (data1, data2) in enumerate(data_loader):
-            data1 = data1.to(device)
-            data2 = data2.to(device)
-            label_size = data1.size()[0]
-            pred = model(data1, data2)
+        for i, (pair1, pair2) in enumerate(data_loader):
+            pair1 = pair1.to(device)
+            pair2 = pair2.to(device)
+            label_size = pair1.size()[0]
+            pred = model(pair1, pair2)
             loss = criterion(pred, torch.from_numpy(np.ones(shape=(label_size, 1))).float().to(device))
             optimizer.zero_grad()
             loss.backward()
@@ -145,69 +109,27 @@ def train(args):
                 print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch + 1, args.epochs, i + 1, total_step, loss.item()))
 
     torch.save(model.state_dict(), 'ranknet.ckpt')
+    print("Save checkpoint {}".format('ranknet.ckpt'))
 
 
-def inference(args):
+def inference(args, q_id, p_id, x):
 
-    
     model = RankNet(args.input_size, args.hidden_size1, args.hidden_size2, args.output_size).to(device)
+    
+    print("Load checkpoint {}".format('ranknet.ckpt'))
     model.load_state_dict(torch.load('ranknet.ckpt'))
     model.eval()
     
-    q_id = []
-    p_id = []
-    x = []
-    
     with torch.no_grad():
-        with codecs.open(args.dataset+"_full_ranking.text", "r", "utf-8") as file:
-            for line in file.readlines():
-                content = line.split('\t')
-
-                q_id.append(content[0]) 
-                p_id.append(content[1])
-                x.append([float(content[3]),float(content[4])])
-                print(content[0],content[1],[float(content[3]),float(content[4])])
-
         tensor_x = torch.tensor(x)
-        y = model.predict(tensor_x)  # [query_num * topk]
+        y = model.predict(tensor_x)  
     
-    
-    
-    logger= collections.defaultdict(dict)
+    scores = collections.defaultdict(dict)
     
     for combination in zip(q_id,p_id,y):
-        logger[combination[0]][combination[1]]=combination[2].item()
-            
-    #print(logger)
+        scores[combination[0]][combination[1]]=combination[2].item()
     
-    for q_id, p_id_score in logger.items():
-        sorted_p_id_score=sorted(p_id_score.items(), key=lambda x:x[1], reverse = True)
-        
-        logger[q_id]=sorted_p_id_score
-        
-        #print("=====")
-        #print(q_id)
-        #print()
-        #print(p_id_score)
-        #print()
-        #print(sorted_p_id_score)
-        
-    
-    with codecs.open(args.dataset+"_re_ranking.text", "w", "utf-8") as file:
-        for q_id, p_id_score in logger.items():
-            row_num=0
-            for p_id, score in p_id_score:
-                row_num+=1
- 
-                ranking =  row_num            
-                
-                file.write('\t'.join([q_id, p_id, str(ranking), str(score), args.ranking+"_"+args.dataset])+os.linesep)
-        
-    
+    return scores
 
-    """
-    top_p_indexs = np.argsort(-predicted_y, 1)[:, :args.topk]
-    
-    
+
         
-    """  

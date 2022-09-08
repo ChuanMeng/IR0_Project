@@ -17,10 +17,14 @@ def passage_loader(path):
 
 def query_loader(path):
     
-    print("load queris from: {}".format(path))
-    x = json.load(open(path, 'r'))
+    print("load queries from: {}".format(path))
+    queries = json.load(open(path, 'r'))
     
-    return x
+    return queries
 
 
-
+def label_loader(path):
+    print("load labels from: {}".format(path))
+    labels = json.load(open(path, 'r'))
+    
+    return labels

@@ -1,52 +1,44 @@
 import math
 import json
-
+import collections
 
 
 class tfidf(object):
-    def __init__(self, docs):
-        self.D = len(docs)
-        self.docs = docs
-        self.f = []     
+    def __init__(self, passages):
+        self.num_p = len(passages)
+        self.passages = passages
+        self.f = {}     
         self.df = {}    
         self.idf = {}  
         self.init()
 
     def init(self):
-        for doc in self.docs:
+        for p_id, words in self.passages.items():
             tmp = {}
-            for word in doc:
+            for word in words:
                 tmp[word] = tmp.get(word, 0) + 1  
-            self.f.append(tmp) 
-            
-            for k in tmp.keys():
-                self.df[k] = self.df.get(k, 0) + 1
                 
-        for k, v in self.df.items():
-            self.idf[k] = math.log(self.D)-math.log(v+1)
+            self.f[p_id]=tmp
             
-        json_f = {"idf": self.idf, "f": self.f}
-        json_f = json.dumps(json_f)
-        
+            for word in tmp.keys():
+                self.df[word] = self.df.get(word, 0) + 1
+                
+        for word, num_p_word in self.df.items():
+            self.idf[word] = math.log(self.num_p)-math.log(num_p_word+1)
+            
 
-    def sim(self, query, index):
+    def sim(self, queries):
         
-        score = 0
+        scores = collections.defaultdict(dict)
         
-        for word in query:
-            if word not in self.f[index]:
-                continue
-            
-            #tf=/len(self.docs[index])
-            score += self.f[index][word]*self.idf[word]
-            
-        return score
-
-    def simall(self, query):
-        scores = []
+        for q_id, q_words in queries.items():
+            for p_id, _ in self.passages.items():
+                score=0
+                for q_word in q_words:
+                    if q_word not in self.f[p_id]:
+                        continue
+                    score += self.f[p_id][q_word]*self.idf[q_word]
+                    
+                scores[q_id][p_id]=score
         
-        for index in range(self.D):
-            score = self.sim(query, index)
-            scores.append(score)
-            
-        return scores  # [passage_nums]
+        return scores  
