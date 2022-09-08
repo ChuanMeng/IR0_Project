@@ -20,24 +20,24 @@ Please run the following scripts sequentially.
 
 ### Full ranking on the training, validation and test sets
 ```
-Python main.py --mode inference --ranking full_ranking --dataset train
-Python main.py --mode inference --ranking full_ranking --dataset validation
-Python main.py --mode inference --ranking full_ranking --dataset test
+Python main.py --mode infer --ranking_type full_ranking --dataset training
+Python main.py --mode infer --ranking_type full_ranking --dataset validation
+Python main.py --mode infer --ranking_type full_ranking --dataset test
 ```
 
 ### Re ranking: training on the training set, and inference on the validation and test sets
 ```
-Python main.py --mode train --ranking re_ranking --dataset train --replicability
-Python main.py --mode inference --ranking re_ranking --dataset validation
-Python main.py --mode inference --ranking re_ranking --dataset test
+Python main.py --mode train --ranking_type re_ranking --dataset train --replicability
+Python main.py --mode inference --ranking_type re_ranking --dataset validation
+Python main.py --mode inference --ranking_type re_ranking --dataset test
 ```
 
 ### Evaluation in terms of full ranking and re ranking on the validation and test sets
 ```
-Python main.py --mode evaluation --ranking full_ranking --dataset validation
-Python main.py --mode evaluation --ranking re_ranking --dataset validation
-Python main.py --mode evaluation --ranking full_ranking --dataset test
-Python main.py --mode evaluation --ranking re_ranking --dataset test
+Python main.py --mode evaluation --ranking_type full_ranking --dataset validation
+Python main.py --mode evaluation --ranking_type re_ranking --dataset validation
+Python main.py --mode evaluation --ranking_type full_ranking --dataset test
+Python main.py --mode evaluation --ranking_type re_ranking --dataset test
 ```
 
 ## Result
