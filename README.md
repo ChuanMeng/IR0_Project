@@ -34,10 +34,10 @@ Python main.py --mode infer --ranking_type re_ranking --dataset test
 
 ### Evaluation in terms of full ranking and re ranking on the validation and test sets
 ```
-Python main.py --mode evaluation --ranking_type full_ranking --dataset validation
-Python main.py --mode evaluation --ranking_type re_ranking --dataset validation
-Python main.py --mode evaluation --ranking_type full_ranking --dataset test
-Python main.py --mode evaluation --ranking_type re_ranking --dataset test
+Python main.py --mode evaluate --ranking_type full_ranking --dataset validation
+Python main.py --mode evaluate --ranking_type re_ranking --dataset validation
+Python main.py --mode evaluate --ranking_type full_ranking --dataset test
+Python main.py --mode evaluate --ranking_type re_ranking --dataset test
 ```
 
 ## Result
