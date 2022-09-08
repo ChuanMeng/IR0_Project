@@ -11,7 +11,7 @@
 ## Requirements 
 * python 3.6-3.9
 * pytorch 
-* nltk
+* Numpy
 
 ## Data statistics
 
