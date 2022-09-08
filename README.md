@@ -1,7 +1,10 @@
 # Project Guidelines
 
 ## Overall
-...
+
+what are the input (data) and output (submit to leaderboard)?
+how many modules? 
+what is the fuction of each module? what are the input and output of each module?
 
 ## Requirements 
 * python 3.6-3.9
@@ -13,6 +16,8 @@
 | ------------------ | ------------------------ |
 | Passage.json       | 250000                   |
 | train_queries.json | 3000                     |
+| ... | 3000                     |
+| ... | 3000                     |
 
 
 ## Pipleline
