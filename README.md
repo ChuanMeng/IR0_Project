@@ -43,19 +43,19 @@ Python main.py --mode evaluate --ranking_type re_ranking --dataset test
 ## Result
 ```
 # The result of full ranking on the validation set
-MRR@100: 0.3148
-NDCG@100: 0.6032
+MRR@100: 0.3137
+NDCG@100: 0.3803
 
 # The result of re ranking on the validation set
-MRR@100: 0.3203
-NDCG@100: 0.6111
+MRR@100: 0.3172
+NDCG@100: 0.3843
 
 # The result of full ranking on the test set
-MRR@100: 0.2858
-NDCG@100: 0.5578
+MRR@100: 0.2831
+NDCG@100: 0.3506
 
 # The result of re ranking on the test set
-MRR@100: 0.2885
-NDCG@100: 0.5623
+MRR@100: 0.2949
+NDCG@100: 0.3602
 ```
 ## Submission to the leaderboard
