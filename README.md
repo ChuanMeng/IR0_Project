@@ -15,14 +15,14 @@
 
 ## Data statistics
 
-| Datasets                    | File                     |Num |
-| ------------------ | ------------------------ |------------------------ |
-| Passages           | 250000                   | 250000                   |
-| Queries on the training set       | 3000                     |3000                     |
-| Queries on the validation set     | 3000                     |
-| Queries on the test set.          | 3000                     |
-| Labels on the training set         | 3000                     |
-| Labels on the validation set          | 3000                     |
+| Datasets                          | File                     |Num                       |Num                       |
+| ------------------                | ------------------------ |------------------------ |------------------------ |
+| Passages                          | 250000                   | 250000                   |  |
+| Queries on the training set       | 3000                     |3000                     |  |
+| Queries on the validation set     | 3000                     |                            |  |
+| Queries on the test set.          | 3000                     |                      |  |
+| Labels on the training set                           | 3000                     |                   |  |
+| Labels on the validation set                          | 3000                     |                   |  |
 | Labels on the on the test set (unavailable)          | 3000                     |
 
 ## Pipleline
