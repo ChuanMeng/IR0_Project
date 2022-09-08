@@ -34,20 +34,25 @@ def ndcg(scores, labels, k):
     for q_id, p_ids in scores.items():
         DCG_pred = 0
         num_gt_passage = len(labels[q_id])
+        
         assert len(p_ids)>= k # 'NDCG@K cannot be computed, invalid value of K.'
         
         for index, p_id in enumerate(p_ids):   
             if index == k:
                 break
             if p_id in labels[q_id]:
-                DCG_pred += 1 / np.log2(index + 1 + 1)
+                DCG_pred += labels[q_id][p_id] / np.log2(index + 1 + 1)
                 
         
         DCG_gt = 0
-        for index in range(num_gt_passage):
+        
+        sorted_label_q_id=sorted(labels[q_id].items(), key=lambda x:x[1], reverse = True)
+        
+        for index, (p_id, rating) in enumerate(sorted_label_q_id):
             if index == k:
                 break
-            DCG_gt += 1 / np.log2(index+ 1 + 1)
+            DCG_gt += rating/ np.log2(index+ 1 + 1)
+            
         NDCG += DCG_pred / DCG_gt
                 
 

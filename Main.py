@@ -1,7 +1,5 @@
-
 """
 Created on Tue Aug 30 17:54:12 2022
-
 @author: c.meng
 """
 import datetime
@@ -60,7 +58,7 @@ def re_ranking(args):
         features = []
         labels = []
         
-        #print("Load file {}".format(os.path.join(args.data_path, args.dataset+"_"+args.label_file)))
+
         q2labels = label_loader(os.path.join(args.data_path, args.dataset+"_"+args.label_file))
         
         print("Load file {}".format(os.path.join(args.output_path, "full_ranking"+"_"+args.dataset+"_"+args.result_file)))
@@ -70,7 +68,7 @@ def re_ranking(args):
 
                 q_id.append(content[0]) 
                 features.append([float(content[3]),float(content[4])])
-                labels.append(1 if content[1] in q2labels[content[0]] else 0)
+                labels.append(q2labels[content[0]][content[1]] if content[1] in q2labels[content[0]] else 0)
                 
         train(args, q_id, features, labels)
         
@@ -144,7 +142,7 @@ if __name__ == '__main__':
     # file paths
     parser.add_argument("--data_path", type=str, default='data') 
     parser.add_argument("--output_path", type=str, default='output') 
-    parser.add_argument("--passage_file", type=str, default='passages.json')
+    parser.add_argument("--passage_file", type=str, default='passages_small.json')  # [passages_small.json, passages_large]
     parser.add_argument("--query_file", type=str, default='queries.json')
     parser.add_argument("--label_file", type=str, default='labels.json')
     parser.add_argument("--result_file", type=str, default='result.text')
@@ -198,5 +196,3 @@ if __name__ == '__main__':
     toc = datetime.datetime.now()
     
     print("finished within {}".format(toc - tic))
-        
-    
