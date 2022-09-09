@@ -14,7 +14,7 @@
 * Numpy
 
 ## Data 
-download the dataset from
+download the dataset from [here](https://drive.google.com/drive/folders/1dgkCKaypKHej-NE2HYuiP1VhuF-xCgqT?usp=sharing)
 ```
 
 ```
@@ -36,11 +36,11 @@ Claim that on the validation and test sets, the labels are graded instead of onl
 Please run the following scripts sequentially.
 
 ### Full ranking on the training, validation and test sets
-passage_file can be passages_large.json or passages_small.json
+passage_file can be **passages_small.json** or **passages_large.json** 
 ```
-Python main.py --mode infer --ranking_type full_ranking --dataset training --passage_file passages_large.json/passages_small.json
-Python main.py --mode infer --ranking_type full_ranking --dataset validation --passage_file passages_large.json/passages_small.json
-Python main.py --mode infer --ranking_type full_ranking --dataset test --passage_file passages_large.json/passages_small.json
+Python main.py --mode infer --ranking_type full_ranking --dataset training --passage_file passages_small.json
+Python main.py --mode infer --ranking_type full_ranking --dataset validation --passage_file passages_small.json
+Python main.py --mode infer --ranking_type full_ranking --dataset test --passage_file passages_small.json
 ```
 
 ### Re ranking: training on the training set, and inference on the validation and test sets
