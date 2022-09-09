@@ -13,7 +13,11 @@
 * pytorch 
 * Numpy
 
-## Data statistics
+## Data 
+download the dataset from
+```
+
+```
 Claim that on the validation and test sets, the labels are graded instead of only 1 on the training set.
 
 
