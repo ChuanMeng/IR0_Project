@@ -19,7 +19,8 @@ Claim that on the validation and test sets, the labels are graded instead of onl
 
 | Datasets                          | File                     |Num                       |Num                       |
 | ------------------                | ------------------------ |------------------------ |------------------------ |
-| Passages                          | 250000                   | 250000                   |  |
+| Passages small                    | 250000                   | 250000                   |  |
+| Passages large                         | 250000                   | 250000                   |  |
 | Queries on the training set       | 3000                     |3000                     |  |
 | Queries on the validation set     | 3000                     |                            |  |
 | Queries on the test set.          | 3000                     |                      |  |
