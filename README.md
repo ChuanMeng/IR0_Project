@@ -1,34 +1,11 @@
-# Project Guidelines
-
-## Overall
-
-* what are the input (data) and output (submit to leaderboard)?
-* how many modules? 
-* what is the fuction of each module? what are the input and output of each module?
-* what the students shoud not do? (e.g., cannot use sklearn and other off-the-shelf pacakges for ranking)
-* How the students can improve the pipeline? (e.g., do stem and more advanced word segmentation method ... implement more effective ranking models)
+# Code Guidelines
 
 ## Requirements 
 * python 3.6-3.9
 * pytorch 
 * Numpy
 
-## Data 
-download the dataset from [here]()
 
-Claim that on the validation and test sets, the labels are graded instead of only 1 on the training set.
-
-
-| Datasets                          | File                     |Num                       |Num                       |
-| ------------------                | ------------------------ |------------------------ |------------------------ |
-| Passages small                    | 250000                   | 250000                   |  |
-| Passages large                         | 250000                   | 250000                   |  |
-| Queries on the training set       | 3000                     |3000                     |  |
-| Queries on the validation set     | 3000                     |                            |  |
-| Queries on the test set.          | 3000                     |                      |  |
-| Labels on the training set                           | 3000                     |                   |  |
-| Labels on the validation set                          | 3000                     |                   |  |
-| Labels on the on the test set (unavailable)          | 3000                     |
 
 ## Pipleline
 Please run the following scripts sequentially.
@@ -74,4 +51,3 @@ NDCG@100: 0.3506
 MRR@100: 0.2949
 NDCG@100: 0.3602
 ```
-## Submission to the leaderboard
